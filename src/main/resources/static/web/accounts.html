@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savings Bank - Accounts</title>
+    <link rel="shortcut icon" href="./assets/images/Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/style/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+
+<body class="bg-body-tertiary">
+<div id="app" v-cloak>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid d-flex justify-content-between">
+                <div>
+                    <a class="nav-burger" href="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight1"
+                       aria-controls="offcanvasRight1"><button class="navbar-toggler" type="button"
+                                                               data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+                                                               aria-controls="navbarTogglerDemo03" aria-expanded="false"
+                                                               aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button></a>
+                </div>
+                <a class="navbar-brand" href="../index.html"><img src="./assets/images/Logo.png" alt="Logo"
+                                                                  height="80" class="d-inline-block align-text-top">
+                </a>
+                <div style="display: flex; flex-direction: column; align-items: end;">
+                    <a href=""><svg @click.prevent="logout()" style="color: rgb(7, 25, 82); cursor: pointer;"
+                                    xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                    class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
+                        <path fill-rule="evenodd"
+                              d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                    </svg></a>
+                    <a class="nav-link" @click.prevent="logout()" style="font-size: 0.9rem !important;">Log Out</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="offcanvas offcanvas-start div-off-me" data-bs-scroll="true" tabindex="-1" id="offcanvasRight1"
+             aria-labelledby="offcanvasRightLabel1">
+            <div class="offcanvas-body d-flex flex-column gap-2">
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div>
+                    <a class="nav-link active" aria-current="page" href="#">Accounts</a>
+                    <a class="nav-link" href="./assets/pages/transfers.html">Transfers</a>
+                    <a class="nav-link" href="./assets/pages/cards.html">Cards</a>
+                    <a v-if="email.includes('savingsbank')" class="nav-link" href="../administrator/assets/pages/loans.html">Loans admin</a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg nav-general">
+            <div class="collapse navbar-collapse d-flex justify-content-around div-nav-a" id="navbarNav">
+                <a class="nav-link active" aria-current="page" href="#">Accounts</a>
+                <a class="nav-link" href="./assets/pages/transfers.html">Transfers</a>
+                <a class="nav-link" href="./assets/pages/cards.html">Cards</a>
+                <a v-if="email.includes('savingsbank')" class="nav-link" href="../administrator/assets/pages/loans.html">Loans admin</a>
+                <a v-if="email.includes('savingsbank')" class="nav-link" href="../administrator/manager.html">Manager</a>
+            </div>
+        </nav>
+
+    </header>
+    <main class="mainAccounts">
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./assets/images/Banner1.png" class="d-block w-100 carous-img" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/images/Banner2.png" class="d-block w-100 carous-img" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/images/Banner3.png" class="d-block w-100 carous-img" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <h1>¡Hi, {{client.firstName}}!</h1>
+        <h2 style="text-align: center; padding-bottom: 1rem; color: rgb(53, 162, 159);">Your
+            accounts
+        </h2>
+        <div class="d-flex justify-content-around" style="flex-wrap: wrap;">
+            <div v-if="accounts.length !=0" class="mb-3" v-for="account of accounts" style="max-width: 540px;">
+                <div class="d-flex g-0 container-img-body">
+                    <div class="col-sm-4 col-md-4">
+                        <img src="./assets/images/Image-Accounts.png" class="img-fluid rounded-start image-card-me"
+                             alt="...">
+                    </div>
+                    <div class="col-md-8 card-body d-flex"
+                         style="flex-direction: column; justify-content: space-around; padding: 1rem;">
+                        <small style="text-align: end;">{{account.accountType}} ACCOUNT</small>
+                        <h4 class="card-title title-card"> Account: {{account.number}}</h4>
+                        <h3 class="card-title"> Balance: US$ {{ formatNumber(account.balance)}} </h3>
+                        <p class="card-text"><small class="text-body-secondary"> Creation Date:
+                            {{account.creationDate}}</small>
+                        </p>
+                        <div class="d-flex justify-content-end">
+                            <a class="button-card"
+                               :href="'http://localhost:8080/web/assets/pages/account.html?id=' + account.id">Transactions</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-start" style="margin-top: 0.5rem; cursor: pointer;">
+                    <a class="button-card" @click="deleteAccount(account.id)"
+                       style="font-size: 0.8rem !important; font-weight: 500 !important; padding: 0.3rem !important;">Delete
+                        Account</a>
+                </div>
+            </div>
+            <h3 v-else>You don't have accounts yet</h3>
+        </div>
+        <div v-if="accounts.length<3" class="d-flex justify-content-center" style="margin: 2rem;">
+            <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="button-card"
+               style="background-color: rgb(7, 25, 82); padding: 1rem; cursor: pointer; color:  rgba(139, 246, 228, 0.879)!important;">Create
+                new account</a>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">ACCOUNT TYPE</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <select v-model="accountType" class="form-select" aria-label="Default select example">
+                                <option value="null" selected>Select account type</option>
+                                <option value="SAVING">SAVING</option>
+                                <option value="CURRENT">CURRENT</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancell</button>
+                        <button @click="createNewAccount()" type="button" class="btn btn-primary">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <h2 style="text-align: center; padding-top: 1rem; color: rgb(53, 162, 159);">Your loans
+        </h2>
+        <div class="card-loans" style="flex-wrap: wrap;">
+            <div v-if="loans.length !=0" class="card mb-3" v-for="loan of loans" style="margin: 1rem;">
+                <div class="card-body"
+                     style="padding-right: 3rem; padding-left: 3rem; text-align: center; box-shadow: 2px 2px 3px 2px rgb(152, 150, 150) !important; border: solid 1px rgb(53, 162, 159);">
+                    <h4 class="card-title card-title-loan">{{loan.loanName}} loan</h4>
+                    <h5 class="card-text card-text-loan">Requested amount: US$ {{formatNumber(loan.loanAmount)}}
+                    </h5>
+                    <p class="card-text"><small style="color: rgb(53, 162, 159) !important;" class="text-body-secondary">To pay in {{loan.loanPayments}} payments
+                        of US$ {{formatNumber(loan.loanAmount / loan.loanPayments)}}</small></p>
+                    <p>Amount owed: US$ {{formatNumber(Number(loan.currentAmount
+                        ))}}</p>
+                    <p>Remaining installments: {{loan.currentPayments
+
+                        }}</p>
+                </div>
+            </div>
+            <h3 v-else>You have not applied for loans</h3>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center" style="margin: 0.5rem !important;">
+                <a href="./assets/pages/loan-application.html" class="button-card"
+                   style="background-color: rgb(53, 162, 159); padding: 0.5rem; padding-left: 2rem; padding-right: 2rem; cursor: pointer; margin-bottom: 1rem;">
+                    Apply for a loan</a>
+            </div>
+            <div class="d-flex justify-content-center" style="margin: 0.5rem !important;">
+                <a href="./assets/pages/payLoan.html" class="button-card"
+                   style="background-color: rgb(53, 162, 159); padding: 0.5rem; padding-left: 2rem; padding-right: 2rem; cursor: pointer; margin-bottom: 1rem;">Pay a loan</a>
+            </div>
+        </div>
+
+    </main>
+    <footer>
+        <nav class="navbar navbar-expand-lg container-fluid d-flex justify-content-between nav-footer">
+            <div class="imag">
+                <a class="icon-link" href="https://www.facebook.com/">
+                    <svg class="bi" aria-hidden="true">
+                        <use xlink:href="#box-seam"></use>
+                    </svg>
+                    <img class="img-footer" src="./assets/images/facebook.png" alt="facebook">
+                </a>
+                <a class="icon-link" href="https://www.instagram.com">
+                    <svg class="bi" aria-hidden="true">
+                        <use xlink:href="#box-seam"></use>
+                    </svg>
+                    <img class="img-footer" src="./assets/images/instagram.png" alt="instagram">
+                </a>
+                <a class="icon-link" href="https://web.whatsapp.com/">
+                    <svg class="bi" aria-hidden="true">
+                        <use xlink:href="#box-seam"></use>
+                    </svg>
+                    <img class="img-footer" src="./assets/images/whatsapp.png" alt="whatsapp">
+                </a>
+            </div>
+            <a href="../index.html"><img src="./assets/images/Favicon.png" alt="logo" height="50"></a>
+            <p class="p-footer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-c-circle" viewBox="0 0 16 16">
+                <path
+                        d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM8.146 4.992c-1.212 0-1.927.92-1.927 2.502v1.06c0 1.571.703 2.462 1.927 2.462.979 0 1.641-.586 1.729-1.418h1.295v.093c-.1 1.448-1.354 2.467-3.03 2.467-2.091 0-3.269-1.336-3.269-3.603V7.482c0-2.261 1.201-3.638 3.27-3.638 1.681 0 2.935 1.054 3.029 2.572v.088H9.875c-.088-.879-.768-1.512-1.729-1.512Z" />
+            </svg> All rights reserved</p>
+        </nav>
+    </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="module" src="./assets/js/accounts.js"></script>
+</body>
+
+</html>
