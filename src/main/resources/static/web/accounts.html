@@ -186,7 +186,7 @@
                    style="background-color: rgb(53, 162, 159); padding: 0.5rem; padding-left: 2rem; padding-right: 2rem; cursor: pointer; margin-bottom: 1rem;">
                     Apply for a loan</a>
             </div>
-            <div class="d-flex justify-content-center" style="margin: 0.5rem !important;">
+            <div v-if="loans.length !=0" class="d-flex justify-content-center" style="margin: 0.5rem !important;">
                 <a href="./assets/pages/payLoan.html" class="button-card"
                    style="background-color: rgb(53, 162, 159); padding: 0.5rem; padding-left: 2rem; padding-right: 2rem; cursor: pointer; margin-bottom: 1rem;">Pay a loan</a>
             </div>
