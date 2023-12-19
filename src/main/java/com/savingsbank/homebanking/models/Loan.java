@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.toList;
 @Entity
 public class Loan {
     @Id
-    @GeneratedValue( strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private Double maxAmount;

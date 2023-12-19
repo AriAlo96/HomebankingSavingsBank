@@ -7,9 +7,10 @@ import com.savingsbank.homebanking.models.Client;
 import com.savingsbank.homebanking.repositories.CardRepository;
 import com.savingsbank.homebanking.services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class CardServiceImplement implements CardService {
     @Autowired
     CardRepository cardRepository;

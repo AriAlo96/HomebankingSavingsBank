@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Entity
 public class ClientLoan {
     @Id
-    @GeneratedValue( strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double amount;
     private int payments;

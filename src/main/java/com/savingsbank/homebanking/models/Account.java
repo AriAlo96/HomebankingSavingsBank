@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String number;
     private LocalDate creationDate;

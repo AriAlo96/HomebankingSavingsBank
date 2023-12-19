@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.toList;
 @Entity
 public class Client {
     @Id
-    @GeneratedValue( strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
