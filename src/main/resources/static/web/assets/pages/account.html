@@ -53,8 +53,10 @@
                         <a class="nav-link" aria-current="page" href="../../accounts.html">Accounts</a>
                         <a class="nav-link" href="./transfers.html">Transfers</a>
                         <a class="nav-link" href="./cards.html">Cards</a>
-                        <a v-if="email.includes('savingsbank')" class="nav-link" href="../../../administrator/assets/pages/loans.html">Loans admin</a>
-                        <a v-if="email.includes('savingsbank')" class="nav-link" href="../../../administrator/manager.html">Manager</a>
+                        <a v-if="email.includes('savingsbank')" class="nav-link"
+                            href="../../../administrator/assets/pages/loans.html">Loans admin</a>
+                        <a v-if="email.includes('savingsbank')" class="nav-link"
+                            href="../../../administrator/manager.html">Manager</a>
                     </div>
                 </div>
             </div>
@@ -64,124 +66,159 @@
                     <a class="nav-link" aria-current="page" href="../../accounts.html">Accounts</a>
                     <a class="nav-link" href="./transfers.html">Transfers</a>
                     <a class="nav-link" href="./cards.html">Cards</a>
-                    <a v-if="email.includes('savingsbank')" class="nav-link" href="../../../administrator/assets/pages/loans.html">Loans admin</a>
-                    <a v-if="email.includes('savingsbank')" class="nav-link" href="../../../administrator/manager.html">Manager</a>
+                    <a v-if="email.includes('savingsbank')" class="nav-link"
+                        href="../../../administrator/assets/pages/loans.html">Loans admin</a>
+                    <a v-if="email.includes('savingsbank')" class="nav-link"
+                        href="../../../administrator/manager.html">Manager</a>
                 </div>
             </nav>
 
         </header>
-        <main>
-            <main class="mainAccounts">
-                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="../images/Banner1.png" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../images/Banner2.png" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../images/Banner3.png" class="d-block w-100" alt="...">
-                        </div>
+
+        <main class="mainAccounts">
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../images/Banner1.png" class="d-block w-100" alt="...">
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+                    <div class="carousel-item">
+                        <img src="../images/Banner2.png" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../images/Banner3.png" class="d-block w-100" alt="...">
+                    </div>
                 </div>
-                <div class="container-Account-Table">
-                    <div class="d-flex justify-content-around">
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="d-flex g-0 container-img-body">
-                                <div class="col-sm-4 col-md-4">
-                                    <img src="../images/Image-Accounts.png"
-                                        class="img-fluid rounded-start image-card-me" alt="...">
-                                </div>
-                                <div class="col-md-8 card-body d-flex"
-                                    style="flex-direction: column; justify-content: space-around;">
-                                    <h4 class="card-title"> Account: {{account.number}} </h4>
-                                    <h2 class="card-title"> Balance: US$ {{ formatNumber(Number(account.balance)) }}
-                                    </h2>
-                                    <p class="card-text"><small class="text-body-secondary"> Creation Date:
-                                            {{account.creationDate}}</small>
-                                    </p>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <div class="container-Account-Table">
+                <div class="d-flex justify-content-around">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="d-flex g-0 container-img-body">
+                            <div class="col-sm-4 col-md-4">
+                                <img src="../images/Image-Accounts.png" class="img-fluid rounded-start image-card-me"
+                                    alt="...">
+                            </div>
+                            <div class="col-md-8 card-body d-flex"
+                                style="flex-direction: column; justify-content: space-around;">
+                                <h4 class="card-title"> Account: {{account.number}} </h4>
+                                <h2 class="card-title"> Balance: US$ {{ formatNumber(Number(account.balance)) }}
+                                </h2>
+                                <p class="card-text"><small class="text-body-secondary"> Creation Date:
+                                        {{account.creationDate}}</small>
+                                </p>
+                                <div class="d-flex justify-content-end" style="margin-top: 0.5rem; cursor: pointer;">
+                                    <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="button-card"
+                                        style="font-size: 0.8rem !important; font-weight: 500 !important; padding: 0.3rem !important;">Download
+                                        PDF of account statement</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {{messageError}}
-                    <div style="width: 70%; display: flex; justify-content: center;">
-                        <table class="table table-responsive" style="width: 100%">
-                            <thead>
-                                <tr>
-                                    <th colspan="5" scope="col">Transactions resume</th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Balance</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="transaction of transactions"
-                                    :class="transaction.type === 'DEBIT' ? 'debit' : 'credit'">
-                                    <td scope="row">{{transaction.type}}</td>
-                                    <td> US$ {{formatNumber(Number(transaction.amount))}}</td>
-                                    <td>{{dateFormat(transaction.date)}}</td>
-                                    <td>{{transaction.description}}</td>
-                                    <td>US$ {{formatNumber(Number(transaction.currentBalance))}}</td>
-                                </tr>
-                            </tbody>
-
-                        </table>
-                    </div>
-
                 </div>
-            </main>
-            <footer>
-                <nav class="navbar navbar-expand-lg container-fluid d-flex justify-content-between nav-footer">
-                    <div class="imag">
-                        <a class="icon-link" href="https://www.facebook.com/">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#box-seam"></use>
-                            </svg>
-                            <img class="img-footer" src="../images/facebook.png" alt="facebook">
-                        </a>
-                        <a class="icon-link" href="https://www.instagram.com">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#box-seam"></use>
-                            </svg>
-                            <img class="img-footer" src="../images/instagram.png" alt="instagram">
-                        </a>
-                        <a class="icon-link" href="https://web.whatsapp.com/">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#box-seam"></use>
-                            </svg>
-                            <img class="img-footer" src="../images/whatsapp.png" alt="whatsapp">
-                        </a>
+                {{messageError}}
+                <div style="width: 70%; display: flex; justify-content: center;">
+                    <table class="table table-responsive" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th colspan="5" scope="col">Transactions resume</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">Type</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="transaction of transactions"
+                                :class="transaction.type === 'DEBIT' ? 'debit' : 'credit'">
+                                <td scope="row">{{transaction.type}}</td>
+                                <td> US$ {{formatNumber(Number(transaction.amount))}}</td>
+                                <td>{{dateFormat(transaction.date)}}</td>
+                                <td>{{transaction.description}}</td>
+                                <td>US$ {{formatNumber(Number(transaction.currentBalance))}}</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </main>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">DOWNLOAD ACCOUNT STATEMENT</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <a href="../../../index.html"><img src="../images/Favicon.png" alt="logo" height="50"></a>
-                    <p class="p-footer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                            fill="currentColor" class="bi bi-c-circle" viewBox="0 0 16 16">
-                            <path
-                                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM8.146 4.992c-1.212 0-1.927.92-1.927 2.502v1.06c0 1.571.703 2.462 1.927 2.462.979 0 1.641-.586 1.729-1.418h1.295v.093c-.1 1.448-1.354 2.467-3.03 2.467-2.091 0-3.269-1.336-3.269-3.603V7.482c0-2.261 1.201-3.638 3.27-3.638 1.681 0 2.935 1.054 3.029 2.572v.088H9.875c-.088-.879-.768-1.512-1.729-1.512Z" />
-                        </svg> Savings Bank (Mindhub) - Alochis Ariana</p>
-                </nav>
-            </footer>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="startDate" class="form-label">Start date:</label>
+                            <input type="date" id="startDate" min="2021-08-01" v-model="startDate" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="endingDate" class="form-label">Ending date:</label>
+                            <input type="date" id="endingDate" max="2030-06-30" v-model="endingDate"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancell</button>
+                        <button @click.prevent="exportPDF" type="button" class="btn btn-primary">Download
+                            PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <nav class="navbar navbar-expand-lg container-fluid d-flex justify-content-between nav-footer">
+                <div class="imag">
+                    <a class="icon-link" href="https://www.facebook.com/">
+                        <svg class="bi" aria-hidden="true">
+                            <use xlink:href="#box-seam"></use>
+                        </svg>
+                        <img class="img-footer" src="../images/facebook.png" alt="facebook">
+                    </a>
+                    <a class="icon-link" href="https://www.instagram.com">
+                        <svg class="bi" aria-hidden="true">
+                            <use xlink:href="#box-seam"></use>
+                        </svg>
+                        <img class="img-footer" src="../images/instagram.png" alt="instagram">
+                    </a>
+                    <a class="icon-link" href="https://web.whatsapp.com/">
+                        <svg class="bi" aria-hidden="true">
+                            <use xlink:href="#box-seam"></use>
+                        </svg>
+                        <img class="img-footer" src="../images/whatsapp.png" alt="whatsapp">
+                    </a>
+                </div>
+                <a href="../../../index.html"><img src="../images/Favicon.png" alt="logo" height="50"></a>
+                <p class="p-footer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-c-circle" viewBox="0 0 16 16">
+                        <path
+                            d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM8.146 4.992c-1.212 0-1.927.92-1.927 2.502v1.06c0 1.571.703 2.462 1.927 2.462.979 0 1.641-.586 1.729-1.418h1.295v.093c-.1 1.448-1.354 2.467-3.03 2.467-2.091 0-3.269-1.336-3.269-3.603V7.482c0-2.261 1.201-3.638 3.27-3.638 1.681 0 2.935 1.054 3.029 2.572v.088H9.875c-.088-.879-.768-1.512-1.729-1.512Z" />
+                    </svg> Savings Bank (Mindhub) - Alochis Ariana</p>
+            </nav>
+        </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
         </script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="../js/account.js"></script>
 </body>
 

@@ -1,12 +1,11 @@
 package com.savingsbank.homebanking.controllers;
 
-import com.savingsbank.homebanking.models.Account;
-import com.savingsbank.homebanking.models.Client;
-import com.savingsbank.homebanking.models.Transaction;
-import com.savingsbank.homebanking.models.TransactionType;
+import com.itextpdf.text.DocumentException;
+import com.savingsbank.homebanking.models.*;
 import com.savingsbank.homebanking.services.AccountService;
 import com.savingsbank.homebanking.services.ClientService;
 import com.savingsbank.homebanking.services.TransactionService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -109,5 +112,40 @@ public class TransactionController {
 
         return new ResponseEntity<>("Transaction successfully",
                 HttpStatus.CREATED);
+    }
+    @PostMapping("/clients/current/export-pdf")
+    public ResponseEntity<Object> ExportingToPDF(HttpServletResponse response, Authentication authentication, String accountNumber, String startDate, String endingDate) throws DocumentException, IOException {
+        Client client = clientService.findClientByEmail(authentication.getName());
+        Account account = accountService.findAccountByNumber(accountNumber);
+
+        if (account.getClient() != client) {
+            return new ResponseEntity<>("The account doesn't belong to the authenticated client",
+                    HttpStatus.FORBIDDEN);
+        }
+
+        if (startDate.isBlank()) {
+            return new ResponseEntity<>("Start date cannot be empty", HttpStatus.FORBIDDEN);
+        } else if (endingDate.isBlank()) {
+            return new ResponseEntity<>("End date cannot be empty", HttpStatus.FORBIDDEN);
+        }
+
+        response.setContentType("application/pdf");
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=Transactions" + accountNumber + ".pdf";
+        response.setHeader(headerKey, headerValue);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTimeStart = LocalDateTime.parse(startDate, formatter);
+        LocalDateTime dateTimeEnd = LocalDateTime.parse(endingDate, formatter);
+
+        List<Transaction> listTransactions = transactionService.searchByDate(client, accountNumber, dateTimeStart, dateTimeEnd);
+
+        OutputStream outputStream = response.getOutputStream();
+
+        TransactionPDF exporter = new TransactionPDF(listTransactions, account);
+        exporter.usePDFExport(outputStream);
+
+        return new ResponseEntity<>("PDF created successfully", HttpStatus.CREATED);
     }
 }

@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface TransactionService {
     void saveTransaction(Transaction transaction);
-    public List<Transaction> searchByDate (Client client, String accountNumber, LocalDateTime startDate, LocalDateTime endingDate);
-
+    List<Transaction> searchByDate (Client client, String accountNumber, LocalDateTime startDate, LocalDateTime endingDate);
 }
