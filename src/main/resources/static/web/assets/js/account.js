@@ -68,8 +68,9 @@ const app = Vue.createApp({
                             Swal.fire({
                                 icon: 'success',
                                 text: 'Check your downloads',
-                                showConfirmButton: false,
-                                timer: 3000,
+                                showConfirmButton: true,
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: '#28a745'
                             }).then(() => location.pathname = "/web/accounts.html");
                         })
                         .catch(error => {
@@ -87,7 +88,7 @@ const app = Vue.createApp({
                 .post(`/api/logout`)
                 .then(response => {
                     console.log("SingOut");
-                    location.href = `http://localhost:8080/index.html`;
+                    location.pathname = `/index.html`;
                 })
                 .catch(error => {
                     console.log(error);
