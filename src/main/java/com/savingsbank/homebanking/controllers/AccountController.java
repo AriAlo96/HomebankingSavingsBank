@@ -35,9 +35,9 @@ public class AccountController {
 
     @GetMapping("/accounts/{id}")
     public ResponseEntity<Object> getAccount(Authentication authentication,
-                                             @PathVariable Long id) {
+                                             @PathVariable String id) {
         Client client = (clientService.findClientByEmail(authentication.getName()));
-        Set<Long> accountsId = client.getAccounts().stream().map(account -> account.getId()).collect(Collectors.toSet());
+        Set<String> accountsId = client.getAccounts().stream().map(account -> account.getId()).collect(Collectors.toSet());
         Account account = accountService.findAccountById(id);
         if (!accountsId.contains(id)) {
             return new ResponseEntity<>("the account does not belong to the authenticated client",
@@ -85,7 +85,7 @@ public class AccountController {
     }
 
     @PatchMapping("/clients/current/accounts")
-    public ResponseEntity<Object> deleteAccount(Authentication authentication, @RequestParam Long id) {
+    public ResponseEntity<Object> deleteAccount(Authentication authentication, @RequestParam String id) {
         Client client = clientService.findClientByEmail(authentication.getName());
         Account account = accountService.findById(id);
         if (account == null) {

@@ -1,4 +1,4 @@
 package com.savingsbank.homebanking.dtos;
 
-public record LoanApplicationDTO(long loanId, double amount, int payments, String destinationAccount) {
+public record LoanApplicationDTO(String loanId, double amount, int payments, String destinationAccount) {
 }

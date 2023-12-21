@@ -19,7 +19,7 @@ public class ClientServiceImplement implements ClientService {
     }
 
     @Override
-    public Client findClientById(Long id) {
+    public Client findClientById(String id) {
         return clientRepository.findById(id).orElse(null);
     }
 

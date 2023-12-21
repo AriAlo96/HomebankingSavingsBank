@@ -6,7 +6,7 @@ import com.savingsbank.homebanking.models.TransactionType;
 import java.time.LocalDateTime;
 
 public class TransactionDTO {
-    private Long id;
+    private String id;
     private TransactionType type;
 
     private double amount;
@@ -32,7 +32,7 @@ public class TransactionDTO {
         this.active = transaction.getActive();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

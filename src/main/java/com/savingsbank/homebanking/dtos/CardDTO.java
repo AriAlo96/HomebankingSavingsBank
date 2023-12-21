@@ -7,7 +7,7 @@ import com.savingsbank.homebanking.models.CardType;
 import java.time.LocalDate;
 
 public class CardDTO {
-    private Long id;
+    private String id;
     private String cardHolder;
 
     private CardType type;
@@ -38,7 +38,7 @@ public class CardDTO {
         this.active = card.getActive();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

@@ -16,12 +16,12 @@ public class ClientLoanServiceImplement implements ClientLoanService {
     }
 
     @Override
-    public ClientLoan findById(Long id) {
+    public ClientLoan findById(String id) {
         return clientLoanRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Boolean existsById(Long id) {
+    public Boolean existsById(String id) {
         return clientLoanRepository.existsById(id);
     }
 }

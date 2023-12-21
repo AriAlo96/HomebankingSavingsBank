@@ -11,7 +11,7 @@ public interface CardService {
     boolean existsCardByTypeAndColorAndClientAndActive (CardType type, CardColor color, Client client , boolean active);
     void saveCard (Card card);
     boolean existsCardByNumber (String number);
-    Card findById (Long id);
+    Card findById (String id);
     List<Card> findAll();
 }
 

@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 @Entity
 public class ClientLoan {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     private double amount;
     private int payments;
     private Double currentAmount;
@@ -27,7 +27,7 @@ public class ClientLoan {
         this.currentPayments = currentPayments;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

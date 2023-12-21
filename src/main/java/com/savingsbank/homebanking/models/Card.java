@@ -7,8 +7,8 @@ import java.time.LocalDate;
 @Entity
 public class Card {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     private String cardHolder;
 
     private CardType type;
@@ -43,7 +43,7 @@ public class Card {
         this.active = active;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

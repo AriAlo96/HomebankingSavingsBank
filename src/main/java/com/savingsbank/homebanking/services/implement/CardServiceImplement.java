@@ -33,7 +33,7 @@ public class CardServiceImplement implements CardService {
     }
 
     @Override
-    public Card findById(Long id) {
+    public Card findById(String id) {
         return cardRepository.findById(id).orElse(null);
     }
 

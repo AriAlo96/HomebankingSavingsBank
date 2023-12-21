@@ -3,8 +3,8 @@ package com.savingsbank.homebanking.dtos;
 import com.savingsbank.homebanking.models.ClientLoan;
 
 public class ClientLoanDTO {
-    private Long id;
-    private Long loanId;
+    private String id;
+    private String loanId;
     private String loanName;
     private double loanAmount;
     private int loanPayments;
@@ -23,11 +23,10 @@ public class ClientLoanDTO {
         this.currentPayments = clientLoan.getCurrentPayments();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
-
-    public Long getLoanId() {
+    public String getLoanId() {
         return loanId;
     }
 

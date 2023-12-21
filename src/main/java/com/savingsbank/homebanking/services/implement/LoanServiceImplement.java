@@ -17,7 +17,7 @@ public class LoanServiceImplement implements LoanService {
         return loanRepository.findAll();
     }
     @Override
-    public Loan findLoanById(Long id) {
+    public Loan findLoanById(String id) {
         return loanRepository.findById(id).orElse(null);
     }
 

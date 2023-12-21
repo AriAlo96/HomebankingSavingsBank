@@ -9,8 +9,8 @@ import java.util.Set;
 @Entity
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     private String number;
     private LocalDate creationDate;
     private double balance;
@@ -32,7 +32,7 @@ public class Account {
         this.accountType = accountType;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 

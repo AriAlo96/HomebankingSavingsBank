@@ -18,7 +18,7 @@ public class AccountServiceImplement implements AccountService {
     }
 
     @Override
-    public Account findAccountById(Long id) {
+    public Account findAccountById(String id) {
         return accountRepository.findById(id).orElse(null);
     }
 
@@ -38,7 +38,7 @@ public class AccountServiceImplement implements AccountService {
     }
 
     @Override
-    public Account findById(Long id) {
+    public Account findById(String id) {
         return accountRepository.findById(id).orElse(null);
     }
 

@@ -35,7 +35,7 @@ public class ClientController {
     }
 
     @GetMapping("/clients/{id}")
-    public ClientDTO getClient(@PathVariable Long id){
+    public ClientDTO getClient(@PathVariable String id){
         ClientDTO client = new ClientDTO(clientService.findClientById(id));
         return client;
     }

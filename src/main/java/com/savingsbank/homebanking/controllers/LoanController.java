@@ -48,7 +48,7 @@ public class LoanController {
         Loan loan = loanService.findLoanById(loanApplicationDTO.loanId());
         Account account = accountService.findAccountByNumber(loanApplicationDTO.destinationAccount());
 
-        if (loanApplicationDTO.loanId() == 0) {
+        if (loanApplicationDTO.loanId() == null) {
             return new ResponseEntity<>("The type of loan is required", HttpStatus.FORBIDDEN);
         }
         if (loanApplicationDTO.amount() == 0) {
@@ -135,7 +135,7 @@ public class LoanController {
     }
     @Transactional
     @PostMapping("/loans/payments")
-    public ResponseEntity<Object> payLoan(Authentication authentication, @RequestParam long idLoan , @RequestParam long idAccount ,
+    public ResponseEntity<Object> payLoan(Authentication authentication, @RequestParam String idLoan , @RequestParam String idAccount ,
                                           @RequestParam Double amount){
         Client client = clientService.findClientByEmail(authentication.getName());
         ClientLoan clientLoan = clientLoanService.findById(idLoan);

@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class AccountDTO {
-    private long id;
+    private String id;
     private String number;
     private LocalDate creationDate;
     private double balance;
@@ -32,7 +32,7 @@ public class AccountDTO {
         this.accountType = account.getAccountType();
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 

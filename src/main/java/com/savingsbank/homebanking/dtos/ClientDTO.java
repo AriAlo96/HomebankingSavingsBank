@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ClientDTO {
-    private Long id;
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
@@ -41,7 +41,7 @@ public class ClientDTO {
                 .collect(Collectors.toSet());
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

@@ -5,7 +5,7 @@ import com.savingsbank.homebanking.models.ClientLoan;
 public interface ClientLoanService {
     void saveClientLoan(ClientLoan clientLoan);
 
-    ClientLoan findById (Long id);
+    ClientLoan findById (String id);
 
-    Boolean existsById (Long id);
+    Boolean existsById (String id);
 }

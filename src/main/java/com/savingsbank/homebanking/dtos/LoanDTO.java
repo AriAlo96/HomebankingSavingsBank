@@ -5,7 +5,7 @@ import com.savingsbank.homebanking.models.Loan;
 import java.util.List;
 
 public class LoanDTO {
-    private Long id;
+    private String id;
     private String name;
     private Double maxAmount;
     private List<Integer> payments;
@@ -20,7 +20,7 @@ public class LoanDTO {
 
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

@@ -12,8 +12,8 @@ import static java.util.stream.Collectors.toList;
 @Entity
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
@@ -62,7 +62,7 @@ public class Client {
         this.email = email;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

@@ -12,8 +12,8 @@ import static java.util.stream.Collectors.toList;
 @Entity
 public class Loan {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     private String name;
     private Double maxAmount;
     @ElementCollection
@@ -33,7 +33,7 @@ public class Loan {
         this.interestPercentage = interestPercentage;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
