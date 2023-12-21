@@ -20,7 +20,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("" , "/index.html" , "/web/assets/images/**" , "/web/assets/pages/login.html" ,
+                        .requestMatchers("/index.html" , "/web/assets/images/**" , "/web/assets/pages/login.html" ,
                         "/web/assets/js/index.js" , "/web/assets/js/login.js" , "/web/assets/style/style.css").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/clients" , "/api/login").permitAll()
                         .requestMatchers("/administrator/**" , "/h2-console/**").hasAuthority("ADMIN")
