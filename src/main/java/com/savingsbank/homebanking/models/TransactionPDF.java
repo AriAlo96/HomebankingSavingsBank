@@ -19,14 +19,14 @@ public class TransactionPDF {
     private LocalDateTime localDateTime;
     private Account account;
     private List<Transaction> listTransactions;
-    private static final String LOGO_PATH = "static/web/assets/images/Logo.png";
+//    private static final String LOGO_PATH = "static/web/assets/images/Logo.png";
 
     DecimalFormat currencyFormatter = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    private Image getLogoImage() throws IOException, BadElementException {
-        return Image.getInstance(LOGO_PATH);
-    }
+//    private Image getLogoImage() throws IOException, BadElementException {
+//        return Image.getInstance(LOGO_PATH);
+//    }
 
     public TransactionPDF(List<Transaction> listTransactions, Account account) {
         this.listTransactions = listTransactions;
@@ -104,9 +104,9 @@ public class TransactionPDF {
         Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12);
         Font detailsFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
 
-        Image logoImage = getLogoImage();
-        logoImage.scaleAbsolute(200f, 150f);
-        doc.add(logoImage);
+//        Image logoImage = getLogoImage();
+//        logoImage.scaleAbsolute(200f, 150f);
+//        doc.add(logoImage);
 
         // Título
         Paragraph title = new Paragraph("Transactions list", titleFont);
