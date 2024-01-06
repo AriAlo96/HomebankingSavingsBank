@@ -53,7 +53,7 @@ const app = Vue.createApp({
                     backdrop: ''
                 },
                 preConfirm: () => {
-                    axios.post(`/api/clients/current/export-pdf`, `accountNumber=${this.account.number}&startDate=${this.startDate} 00:00&endingDate=${this.endingDate} 23:55`, {
+                   return axios.post(`/api/clients/current/export-pdf`, `accountNumber=${this.account.number}&startDate=${this.startDate} 00:00&endingDate=${this.endingDate} 23:55`, {
                         responseType: 'blob'
                     })
                         .then(response => {

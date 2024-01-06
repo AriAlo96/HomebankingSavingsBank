@@ -4,7 +4,6 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.savingsbank.homebanking.dtos.TransactionDTO;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -20,13 +19,13 @@ public class TransactionPDF {
     private LocalDateTime localDateTime;
     private Account account;
     private List<Transaction> listTransactions;
-    private static final String LOGO_PATH = "C:/Users/harme/OneDrive/Escritorio/MindHub/homebankingSavingsBank/src/main/resources/static/web/assets/images/Logo.png";
+    private static final String LOGO_PATH = "/web/assets/images/Logo.png";
 
     DecimalFormat currencyFormatter = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     private Image getLogoImage() throws IOException, BadElementException {
-        return Image.getInstance(LOGO_PATH);
+        return Image.getInstance(getClass().getResource(LOGO_PATH));
     }
 
     public TransactionPDF(List<Transaction> listTransactions, Account account) {

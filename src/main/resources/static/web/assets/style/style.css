@@ -359,6 +359,9 @@ table {
     .img-create-card{
         height: 16rem !important;
     }
+    .table-me{
+        font-size: 0.7rem;
+    }
 }
 
 @media screen and (min-width: 600px) {
