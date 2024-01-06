@@ -25,7 +25,7 @@ public class TransactionPDF {
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     private Image getLogoImage() throws IOException, BadElementException {
-        return Image.getInstance(getClass().getResource(LOGO_PATH));
+        return Image.getInstance(LOGO_PATH);
     }
 
     public TransactionPDF(List<Transaction> listTransactions, Account account) {
