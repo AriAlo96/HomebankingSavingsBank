@@ -19,7 +19,7 @@ public class TransactionPDF {
     private LocalDateTime localDateTime;
     private Account account;
     private List<Transaction> listTransactions;
-    private static final String LOGO_PATH = "/web/assets/images/Logo.png";
+    private static final String LOGO_PATH = "static/web/assets/images/Logo.png";
 
     DecimalFormat currencyFormatter = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
