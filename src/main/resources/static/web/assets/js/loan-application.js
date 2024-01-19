@@ -8,17 +8,23 @@ const app = Vue.createApp({
             payments: 0,
             destinationAccount: "",
             accounts: {},
-            email: ""
+            email: "",
+            showSpinner: false,
+            showSpinnerLoans: false
         };
     },
 
     created() {
+        this.showSpinnerLoans = true
         axios.get("/api/loans")
             .then(response => {
                 this.loans = response.data
                 console.log(this.loans);
             })
             .catch(error => console.log(error))
+            .finally(() => {
+                this.showSpinnerLoans = false;
+              });
 
         axios.get("/api/clients/current/accounts")
             .then(response => {
@@ -44,8 +50,8 @@ const app = Vue.createApp({
                 showCancelButton: true,
                 cancelButtonText: 'Cancell',
                 confirmButtonText: 'Yes',
-                confirmButtonColor: '#28a745',
-                cancelButtonColor: '#dc3545',
+                confirmButtonColor: '#35A29F',
+                cancelButtonColor: '#041653',
                 showClass: {
                     popup: 'swal2-noanimation',
                     backdrop: 'swal2-noanimation'
@@ -54,12 +60,13 @@ const app = Vue.createApp({
                     popup: '',
                     backdrop: ''
                 }, preConfirm: () => {
+                    this.showSpinner = true
                     axios.post("/api/loans", { "loanId": `${this.loanId}`, "amount": `${this.amount}`, "payments": `${this.payments}`, "destinationAccount": `${this.destinationAccount}` })
                         .then(() => {
                             Swal.fire({
                                 title: "Successful loan application",
                                 icon: "success",
-                                confirmButtonColor: "#3085d6",
+                                confirmButtonColor: "#35A29F",
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     location.pathname = `/web/assets/pages/loan-application.html`;
@@ -70,11 +77,14 @@ const app = Vue.createApp({
                             Swal.fire({
                                 icon: 'error',
                                 text: error.response.data,
-                                confirmButtonColor: "#7c601893",
+                                confirmButtonColor: "#35A29F",
 
                             });
                             console.log(error);
-                        });
+                        })
+                        .finally(() => {
+                            this.showSpinner = false;
+                          });
                 },
             })
         },
@@ -84,15 +94,33 @@ const app = Vue.createApp({
         },
 
         logout() {
-            axios
-                .post(`/api/logout`)
-                .then(response => {
-                    console.log("SingOut");
-                    location.pathname = `/index.html`;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+            Swal.fire({
+                title: 'Are you sure you want to log out?',
+                text: 'Will be redirected to the homepage',
+                showCancelButton: true,
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Log Out',
+                confirmButtonColor: '#35A29F',
+                cancelButtonColor: '#041653',
+                showClass: {
+                    popup: 'swal2-noanimation',
+                    backdrop: 'swal2-noanimation'
+                },
+                hideClass: {
+                    popup: '',
+                    backdrop: ''
+                }, 
+                preConfirm: () => {
+                    axios.post(`/api/logout`)
+                        .then(response => {
+                            console.log("SignOut");
+                            location.pathname = `/index.html`;
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                }
+            });
         },
         formatNumber(number) {
             return number.toLocaleString("De-DE", {

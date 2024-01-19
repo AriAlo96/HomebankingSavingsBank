@@ -99,6 +99,10 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
+            <div v-if="showSpinner" class="d-flex justify-content-center align-items-center m-2 gap-2" style="color: #35A29F; font-size: 1.1rem;">
+                <span class="spinner-border"></span>
+                <span role="status">Loading data...</span>
+              </div>
             <div class="container-Account-Table">
                 <div class="d-flex justify-content-around">
                     <div class="card mb-3" style="max-width: 540px;">
@@ -158,8 +162,14 @@
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
+                    <div v-if="showSpinner" class="d-flex justify-content-center align-items-center m-2 gap-2" style="color: #35A29F; font-size: 1.1rem;">
+                        <span class="spinner-border"></span>
+                        <span role="status">Downloading PDF...</span>
+                      </div>
                     <div class="modal-header">
+                        <div class="d-flex flex-column justify-content-center">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">DOWNLOAD ACCOUNT STATEMENT</h1>
+                        </div>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -173,6 +183,7 @@
                                 class="form-control">
                         </div>
                     </div>
+                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancell</button>
                         <button @click.prevent="exportPDF" type="button" class="btn btn-primary">Download

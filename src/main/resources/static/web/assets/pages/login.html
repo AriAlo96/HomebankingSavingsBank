@@ -15,7 +15,7 @@
   <div id="app" v-cloak>
     <nav class="navbar navbar-expand-lg nav-general">
       <div class="collapse navbar-collapse d-flex justify-content-around div-nav-a" id="navbarNav">
-        <a class="nav-link active" style="color: rgb(18, 46, 137);" aria-current="page"
+        <a class="nav-link" style="color: rgb(18, 46, 137);" aria-current="page"
           href="../../../index.html">Home</a>
         <a class="nav-link" style="color: rgb(18, 46, 137);" href="#register">BECOME A CLIENT!</a>
       </div>
@@ -32,8 +32,10 @@
             <div class="col-md-6 contents">
               <div class="row justify-content-center">
                 <div class="col-md-12">
-                  <div class="mb-4">
+                  <div class="mb-4 d-flex gap-3">
                     <h3>Sign In</h3>
+                    <div v-if="showSpinner" class="spinner-border" role="status" style="color: #35A29F;">
+                    </div>
                   </div>
                   <form action="#" method="post">
                     <div class="form-group first">
@@ -65,8 +67,12 @@
 
             <div v-if="showRegisterForm" id="register" class="row justify-content-center" style="padding: 2rem;">
               <div class="col-md-12">
-                <h5 class="d-block text-left my-4 text-muted" style="color: rgb(53, 162, 159)!important;">Register
+                <div class="d-flex justify-content-around align-items-center">
+                  <h5 class="d-block text-left my-4 text-muted" style="color: rgb(53, 162, 159)!important;">Register
                   here!</h5>
+                  <div v-if="showSpinnerRegister" class="spinner-border" role="status" style="color: #35A29F;">
+                  </div>
+                </div>
                 <form action="#" method="post">
                   <div class="form-group first">
                     <label for="firstName">First name</label>

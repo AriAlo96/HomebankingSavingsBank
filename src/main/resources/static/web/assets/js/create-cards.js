@@ -6,7 +6,8 @@ const app = Vue.createApp({
             debitCards: [],
             cardType: "",
             cardColor: "",
-            email: ""
+            email: "",
+            showSpinner: false
         };
     },
 
@@ -28,42 +29,31 @@ const app = Vue.createApp({
         logout() {
             Swal.fire({
                 title: 'Are you sure you want to log out?',
-                text: 'You will need to log in again to access your accounts',
+                text: 'Will be redirected to the homepage',
                 showCancelButton: true,
-                cancelButtonText: 'Cancell',
-                confirmButtonText: 'Yes',
-                confirmButtonColor: '#28a745',
-                cancelButtonColor: '#dc3545',
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Log Out',
+                confirmButtonColor: '#35A29F',
+                cancelButtonColor: '#041653',
                 showClass: {
-                  popup: 'swal2-noanimation',
-                  backdrop: 'swal2-noanimation'
+                    popup: 'swal2-noanimation',
+                    backdrop: 'swal2-noanimation'
                 },
                 hideClass: {
-                  popup: '',
-                  backdrop: ''
-            }, preConfirm: () => {
-            axios
-                .post(`/api/logout`)
-                .then(() => {
-                    Swal.fire({
-                        title: "Successfully logout",
-                        icon: "success",
-                        confirmButtonColor: "#3085d6",
-                      }).then((result) => {
-                        if (result.isConfirmed) {
+                    popup: '',
+                    backdrop: ''
+                }, 
+                preConfirm: () => {
+                    axios.post(`/api/logout`)
+                        .then(response => {
+                            console.log("SignOut");
                             location.pathname = `/index.html`;
-                        }
-                      });      
-                })
-                .catch(error => {
-                    Swal.fire({
-                      icon: 'error',
-                      text: error.response.data,
-                      confirmButtonColor: "#7c601893",
-                    });
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                }
             });
-            }})
-            
         },
 
         createNewCard() {
@@ -73,8 +63,8 @@ const app = Vue.createApp({
                 showCancelButton: true,
                 cancelButtonText: 'Cancell',
                 confirmButtonText: 'Yes',
-                confirmButtonColor: '#28a745',
-                cancelButtonColor: '#dc3545',
+                confirmButtonColor: '#35A29F',
+                cancelButtonColor: '#041653',
                 showClass: {
                   popup: 'swal2-noanimation',
                   backdrop: 'swal2-noanimation'
@@ -83,12 +73,13 @@ const app = Vue.createApp({
                   popup: '',
                   backdrop: ''
             }, preConfirm: () => {
+                this.showSpinner = true
             axios.post(`/api/clients/current/cards`, `type=${this.cardType}&color=${this.cardColor}`)
                 .then(() => {
                     Swal.fire({
                         title: "Successfully created card",
                         icon: "success",
-                        confirmButtonColor: "#3085d6",
+                        confirmButtonColor: "#35A29F",
                       }).then((result) => {
                         if (result.isConfirmed) {
                             location.pathname = `/web/assets/pages/cards.html`;
@@ -99,9 +90,12 @@ const app = Vue.createApp({
                     Swal.fire({
                       icon: 'error',
                       text: error.response.data,
-                      confirmButtonColor: "#7c601893",
+                      confirmButtonColor: "#35A29F",
                     });
-            });
+            })
+            .finally(() => {
+                this.showSpinner = false;
+              }); 
             },
         })
     },

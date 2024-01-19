@@ -84,9 +84,13 @@
                     <div
                         style="width: 25rem; background-color: rgba(60, 227, 221, 0.236); padding: 1.5rem; padding-top: 3rem; border-radius: 1rem; margin: 1rem;">
                         <div>
-
+                            <div v-if="showSpinner" class="d-flex justify-content-center align-items-center m-2 gap-2" style="color: #35A29F; font-size: 1.1rem;">
+                                <span class="spinner-border"></span>
+                                <span role="status">Confirming your payment...</span>
+                              </div>
                             <div class="input-group mb-3">
                                 <select v-model="idLoan" class="form-select" aria-label="Default select example">
+                                    <option class="spinner-border" v-if="showSpinnerLoans" role="status" style="color: #35A29F;" disabled>Loading loans...</option>
                                     <option value="0">Select the loan to pay</option>
                                     <option v-for="loan of loans" :value="loan.id">{{loan.loanName}} (Value of your fee: US${{formatNumber(Number(loan.loanAmount / loan.loanPayments))}}) 
                                     </option>

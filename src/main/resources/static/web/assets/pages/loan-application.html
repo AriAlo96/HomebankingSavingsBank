@@ -78,8 +78,13 @@
                     </div>
                     <div style="width: 25rem; background-color: rgba(60, 227, 221, 0.236); padding: 1.5rem; padding-top: 1rem; border-radius: 1rem; margin: 1rem;">
                         <div>
+                            <div v-if="showSpinner" class="d-flex justify-content-center align-items-center m-2 gap-2" style="color: #35A29F; font-size: 1.1rem;">
+                                <span class="spinner-border"></span>
+                                <span role="status">Validating your loan application...</span>
+                              </div>
                             <div class="input-group mb-3">
                                 <select v-model="loanId" class="form-select" aria-label="Default select example">
+                                    <option class="spinner-border" v-if="showSpinnerLoans" role="status" style="color: #35A29F;" disabled>Loading loans...</option>
                                     <option value="0" selected>Select the type of loan</option>
                                     <option v-for="loan in loans" :value="loan.id">{{ loan.name }} (Max amount: US$ {{formatNumber(Number(loan.maxAmount))}} - Interest: {{(loan.interestPercentage * 100)}}%)</option>
                                 </select>

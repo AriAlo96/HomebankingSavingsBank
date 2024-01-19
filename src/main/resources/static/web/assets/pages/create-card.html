@@ -83,6 +83,10 @@
                         </div>
                         <div class="d-flex flex-column align-items-center"
                             style="width: 25rem; background-color: rgba(60, 227, 221, 0.236); padding: 1.5rem; padding-top: 2rem; border-radius: 1rem;">
+                            <div v-if="showSpinner" class="d-flex justify-content-center align-items-center m-2 gap-2" style="color: #041653; font-size: 1.1rem;">
+                                <span class="spinner-border"></span>
+                                <span role="status">Creating your card...</span>
+                              </div>
                             <div>
                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Select type and color card</h1>
                             </div>

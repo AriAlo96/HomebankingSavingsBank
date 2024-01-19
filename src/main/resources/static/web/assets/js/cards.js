@@ -8,11 +8,13 @@ const app = Vue.createApp({
             cardType: "",
             cardColor: "",
             currentDate: new Date(),
-            email: ""
+            email: "",
+            showSpinner: false
         };
     },
 
     created() {
+        this.showSpinner = true
         axios.get("/api/clients/current")
             .then(response => {
                 this.client = response.data;
@@ -24,22 +26,42 @@ const app = Vue.createApp({
             })
             .catch(error => {
                 console.log(error);
-            });
-           
+            })
+            .finally(() => {
+                this.showSpinner = false;
+              });           
 
     },
 
     methods: {
         logout() {
-            axios
-                .post(`/api/logout`)
-                .then(response => {
-                    console.log("SingOut");
-                    location.pathname = `/index.html`;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+            Swal.fire({
+                title: 'Are you sure you want to log out?',
+                text: 'Will be redirected to the homepage',
+                showCancelButton: true,
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Log Out',
+                confirmButtonColor: '#35A29F',
+                cancelButtonColor: '#041653',
+                showClass: {
+                    popup: 'swal2-noanimation',
+                    backdrop: 'swal2-noanimation'
+                },
+                hideClass: {
+                    popup: '',
+                    backdrop: ''
+                }, 
+                preConfirm: () => {
+                    axios.post(`/api/logout`)
+                        .then(response => {
+                            console.log("SignOut");
+                            location.pathname = `/index.html`;
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                }
+            });
         },
 
         deleteCard(id){
@@ -49,8 +71,8 @@ const app = Vue.createApp({
                 showCancelButton: true,
                 cancelButtonText: 'Cancell',
                 confirmButtonText: 'Yes',
-                confirmButtonColor: '#28a745',
-                cancelButtonColor: '#dc3545',
+                confirmButtonColor: '#35A29F',
+                cancelButtonColor: '#041653',
                 showClass: {
                   popup: 'swal2-noanimation',
                   backdrop: 'swal2-noanimation'
@@ -73,7 +95,7 @@ const app = Vue.createApp({
                     Swal.fire({
                       icon: 'error',
                       text: error.response.data,
-                      confirmButtonColor: "#7c601893",
+                      confirmButtonColor: "#35A29F",
                     });
             });
             },

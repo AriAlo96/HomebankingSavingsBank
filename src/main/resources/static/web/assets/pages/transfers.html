@@ -62,7 +62,7 @@
             <nav class="navbar navbar-expand-lg nav-general">
                 <div class="collapse navbar-collapse d-flex justify-content-around div-nav-a" id="navbarNav">
                     <a class="nav-link" aria-current="page" href="../../accounts.html">Accounts</a>
-                    <a class="nav-link" href="#">Transfers</a>
+                    <a class="nav-link active" href="#">Transfers</a>
                     <a class="nav-link" href="./cards.html">Cards</a>
                     <a v-if="email.includes('savingsbank')" class="nav-link" href="../../../administrator/assets/pages/loans.html">Loans admin</a>
                     <a v-if="email.includes('savingsbank')" class="nav-link" href="../../../administrator/manager.html">Manager</a>
@@ -75,7 +75,6 @@
                 transfer!
             </h2>
             <div>
-
                 <div class="d-flex justify-content-around align-items-center flex-wrap">
                     <div style= "width:50%; height: auto;">
                         <img src="../images/Transfers.png"
@@ -85,9 +84,13 @@
                     <div
                         style="width: 25rem; background-color: rgba(60, 227, 221, 0.236); padding: 1.5rem; padding-top: 3rem; border-radius: 1rem; margin: 1rem;">
                         <div>
-
+                            <div v-if="showSpinner" class="d-flex justify-content-center align-items-center m-2 gap-2" style="color: #35A29F; font-size: 1.1rem;">
+                                <span class="spinner-border"></span>
+                                <span role="status">Making a transfer...</span>
+                              </div>
                             <div class="input-group mb-3">
                                 <select v-model="originNumber" class="form-select" aria-label="Default select example">
+                                    <option class="spinner-border" v-if="showSpinnerOriginAccount" role="status" style="color: #35A29F;" disabled>Loading accounts...</option>
                                     <option value="">Origin account</option>
                                     <option v-for="account of accounts" :value="account.number">{{account.number}}
                                         (Balance: US${{ account.balance }})

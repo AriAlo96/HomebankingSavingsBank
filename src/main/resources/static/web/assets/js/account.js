@@ -7,11 +7,13 @@ const app = Vue.createApp({
             messageError: "",
             email: "",
             startDate: "",
-            endingDate: ""
+            endingDate: "",
+            showSpinner: false,
         };
     },
 
     created() {
+        this.showSpinner = true
         let urlParams = new URLSearchParams(location.search);
         let id = urlParams.get('id')
         axios.get(`/api/accounts/${id}`)
@@ -23,7 +25,10 @@ const app = Vue.createApp({
             })
             .catch(error => {
                 this.messageError = error.response.data;
-            });
+            })
+            .finally(() => {
+                this.showSpinner = false;
+              });
 
         axios.get("/api/clients/current")
             .then(response => {
@@ -32,7 +37,10 @@ const app = Vue.createApp({
             })
             .catch(error => {
                 console.log(error);
-            });
+            })
+            .finally(() => {
+                this.showSpinner = false;
+              });     
     },
     methods: {
         exportPDF() {
@@ -42,8 +50,8 @@ const app = Vue.createApp({
                 showCancelButton: true,
                 cancelButtonText: 'Cancel',
                 confirmButtonText: 'Download',
-                confirmButtonColor: '#28a745',
-                cancelButtonColor: '#dc3545',
+                confirmButtonColor: '#35A29F',
+                cancelButtonColor: '#041653',
                 showClass: {
                     popup: 'swal2-noanimation',
                     backdrop: 'swal2-noanimation'
@@ -53,7 +61,8 @@ const app = Vue.createApp({
                     backdrop: ''
                 },
                 preConfirm: () => {
-                   return axios.post(`/api/clients/current/export-pdf`, `accountNumber=${this.account.number}&startDate=${this.startDate} 00:00&endingDate=${this.endingDate} 23:55`, {
+                    this.showSpinner = true
+                     return axios.post(`/api/clients/current/export-pdf`, `accountNumber=${this.account.number}&startDate=${this.startDate} 00:00&endingDate=${this.endingDate} 23:55`, {
                         responseType: 'blob'
                     })
                         .then(response => {
@@ -70,30 +79,52 @@ const app = Vue.createApp({
                                 text: 'Check your downloads',
                                 showConfirmButton: true,
                                 confirmButtonText: 'OK',
-                                confirmButtonColor: '#28a745'
+                                confirmButtonColor: '#35A29F'
                             }).then(() => location.pathname = "/web/accounts.html");
                         })
                         .catch(error => {
                             Swal.showValidationMessage(
                                 `Request failed: ${error.response.data}`
                             );
-                        });
+                        })
+                        .finally(() => {
+                            this.showSpinner = false;
+                          });
                 }
             });
         },
 
 
         logout() {
-            axios
-                .post(`/api/logout`)
-                .then(response => {
-                    console.log("SingOut");
-                    location.pathname = `/index.html`;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+            Swal.fire({
+                title: 'Are you sure you want to log out?',
+                text: 'Will be redirected to the homepage',
+                showCancelButton: true,
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Log Out',
+                confirmButtonColor: '#35A29F',
+                cancelButtonColor: '#041653',
+                showClass: {
+                    popup: 'swal2-noanimation',
+                    backdrop: 'swal2-noanimation'
+                },
+                hideClass: {
+                    popup: '',
+                    backdrop: ''
+                }, 
+                preConfirm: () => {
+                    axios.post(`/api/logout`)
+                        .then(response => {
+                            console.log("SignOut");
+                            location.pathname = `/index.html`;
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                }
+            });
         },
+        
 
         formatNumber(number) {
             return number.toLocaleString("De-DE", {

@@ -63,7 +63,7 @@
                 <div class="collapse navbar-collapse d-flex justify-content-around div-nav-a" id="navbarNav">
                     <a class="nav-link" aria-current="page" href="../../accounts.html">Accounts</a>
                     <a class="nav-link" href="./transfers.html">Transfers</a>
-                    <a class="nav-link" href="./cards.html">Cards</a>
+                    <a class="nav-link active" aria-current="page" href="./cards.html">Cards</a>
                     <a v-if="email.includes('savingsbank')" class="nav-link" href="../../../administrator/assets/pages/loans.html">Loans admin</a>
                     <a v-if="email.includes('savingsbank')" class="nav-link" href="../../../administrator/manager.html">Manager</a>
                 </div>
@@ -96,6 +96,10 @@
             </div>
             <h2 style="font-size: 3rem; text-align: center; padding-top: 0.5rem; color: rgb(53, 162, 159);">Your cards
             </h2>
+            <div v-if="showSpinner" class="d-flex justify-content-center align-items-center m-2 gap-2" style="color: #35A29F; font-size: 1.1rem;">
+                <span class="spinner-border"></span>
+                <span role="status">Loading your cards...</span>
+              </div>
             <div>
             <div class="d-flex justify-content-around flex-column gap-5" style="padding: 1rem; margin-bottom: 3rem;">
                 <div class="d-flex flex-column flex-wrap">
@@ -167,7 +171,7 @@
             
                 <div class="d-flex flex-column flex-wrap">
                     <h3 class="h3-cards" style="margin: 1rem; font-size: 2rem !important;">Credit Cards</h3>
-                    <div class="container-ext d-flex gap-2 flex-wrap">
+                    <div class="container-ext d-flex gap-5 flex-wrap">
                         <div v-if="creditCards.length !== 0" class="card-ext" v-for="card of creditCards">
                             <h6 style="color: black;" v-if="card.thruDate < currentDate.toLocaleDateString()">This card is expired</h6>
                             <div class="card-inner-ext" style="margin: 0.5rem;">
@@ -239,7 +243,7 @@
             </div>
         </main>
         <footer>
-            <nav class="navbar navbar-expand-lg container-fluid d-flex justify-content-between nav-footer">
+            <nav class="navbar navbar-expand-lg container-fluid d-flex justify-content-between align-items-center nav-footer">
                 <div class="imag" style="padding: 1rem;">
                     <a class="icon-link" href="https://www.facebook.com/">
                         <svg class="bi" aria-hidden="true">
