@@ -93,7 +93,7 @@
                                     <option class="spinner-border" v-if="showSpinnerOriginAccount" role="status" style="color: #35A29F;" disabled>Loading accounts...</option>
                                     <option value="">Origin account</option>
                                     <option v-for="account of accounts" :value="account.number">{{account.number}}
-                                        (Balance: US${{ account.balance }})
+                                        (Balance: US${{ formatNumber(account.balance) }})
                                     </option>
                                 </select>
                             </div>
